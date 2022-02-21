@@ -1,0 +1,55 @@
+<?php
+    require 'config/config.php';
+/*    require 'clases/Conexion.php';
+    require 'clases/Logger.php';
+    require 'clases/RegistrarAtributos.php';
+    require 'clases/Region.php'; */
+    $Region = new Region();
+    $regiones = $Region->listarRegiones();
+    include 'includes/header.html';
+    include 'includes/nav.php';
+?>
+
+    <main class="container py-3">
+        <h1>Panel de administración de regiones</h1>
+
+        <table class="table table-borderless table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Región</th>
+                <th colspan="2">
+                    <a href="formAgregarRegion.php" class="btn btn-outline-secondary">
+                        Agregar <i class="far fa-plus-square ml-1"></i>
+                    </a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+<?php
+            foreach ( $regiones as $region ){
+?>
+            <tr>
+                <td><?= $region->idRegion ?></td>
+                <td><?= $region->regNombre ?></td>
+                <td>
+                    <a href="formModificarRegion.php?idRegion=<?= $region->idRegion ?>" class="btn btn-outline-secondary">
+                        Modificar <i class="far fa-edit ml-1"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="formEliminarRegion.php?idRegion=<?= $region->idRegion ?>" class="btn btn-outline-secondary">
+                        Eliminar <i class="far fa-minus-square ml-1"></i>
+                    </a>
+                </td>
+            </tr>
+<?php
+            }
+?>
+            </tbody>
+        </table>
+    
+    </main>
+<?php
+    include 'includes/footer.php';
+?>
